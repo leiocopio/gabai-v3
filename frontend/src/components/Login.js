@@ -1,17 +1,24 @@
-import { useState, React } from "react";
-import { useNavigate } from "react-router-dom";
-import Popup from "reactjs-popup";
-import { IoIosCloseCircleOutline } from "react-icons/io";
-import Signup from "./Signup";
-import ForgotPass from "./ForgotPass";
-import { useLogin } from "../hooks/useLogin";
+/**
+ * This code imports various dependencies and hooks used in the Login component of the application.
+ * It includes imports for React, React Router, Popup, icons, custom hooks, and Google login functionality.
+ * The code also imports utility functions like `jwtDecode` and `isEmpty`.
+ */
+import { useState, useEffect, React } from "react";
+import { GoogleLogin } from "@react-oauth/google";
 import { Icon } from "react-icons-kit";
 import { eyeOff } from "react-icons-kit/feather/eyeOff";
 import { eye } from "react-icons-kit/feather/eye";
-import SignupAdminAndLawyer from "./SignupAdminAndLawyer";
-import { GoogleLogin } from "@react-oauth/google";
-import axios from "axios";
+import { IoIosCloseCircleOutline } from "react-icons/io";
 import { isEmpty } from "lodash";
+import { jwtDecode } from "jwt-decode";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import ForgotPass from "./ForgotPass";
+import Popup from "reactjs-popup";
+import Signup from "./Signup";
+import { useLogin } from "../hooks/useLogin";
+
+const clientId = process.env.REACT_APP_GOOGLE_CLIENT_ID;
 
 const Login = ({ setLoginSuccess }) => {
   const [identifier, setIdentifier] = useState("");
@@ -36,27 +43,21 @@ const Login = ({ setLoginSuccess }) => {
     await login(identifier, password);
   };
 
-  const handleGoogleLoginSuccess = (response) => {
-    console.log("Google login response:", response);
+  const handleGoogleLoginSuccess = async (response) => {
+    const decode = jwtDecode(response.credential);
+    const GoogleEmail = decode.email;
+
+    if (identifier !== GoogleEmail) {
+      alert("You need to Sign Up first");
+
+      return <Signup />;
+    } else {
+      handleSubmit();
+    }
   };
 
   const handleGoogleLoginError = (error) => {
     console.log(error);
-  };
-
-  const checkEmailExists = async (email) => {
-    try {
-      const response = await axios.get(`/api/check-email?email=${email}`);
-      if (response.data.exists) {
-        // Email exists in the database, proceed with login
-        await login(email, ""); // Assuming you have a login function that takes email and password
-      } else {
-        // Email does not exist, redirect to sign up
-        navigate("/Signup");
-      }
-    } catch (error) {
-      console.log(error);
-    }
   };
 
   const handleKeyDown = (event) => {
@@ -158,7 +159,7 @@ const Login = ({ setLoginSuccess }) => {
                         <br />
                         <div className="w-full text-center">
                           <GoogleLogin
-                            clientId="your-google-client-id"
+                            clientId={clientId}
                             onSuccess={handleGoogleLoginSuccess}
                             onFailure={handleGoogleLoginError}
                           />

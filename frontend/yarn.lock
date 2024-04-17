@@ -1279,6 +1279,11 @@
   resolved "https://registry.npmjs.org/@csstools/selector-specificity/-/selector-specificity-3.0.2.tgz"
   integrity sha512-RpHaZ1h9LE7aALeQXmXrJkRG84ZxIsctEN2biEUmFyKpzFM3zZ35eUMcIzZFsw/2olQE6v69+esEqU2f1MKycg==
 
+"@emailjs/browser@^4.3.3":
+  version "4.3.3"
+  resolved "https://registry.npmjs.org/@emailjs/browser/-/browser-4.3.3.tgz"
+  integrity sha512-ltpt2S/WVREIBXptxYAVYBvXb2O6yTUYiRUWF8OLikMxlmiGsIgKpgHppikNd4Df0uAav7jCsQKcOJ3TJFUx5g==
+
 "@emotion/babel-plugin@^11.11.0":
   version "11.11.0"
   resolved "https://registry.npmjs.org/@emotion/babel-plugin/-/babel-plugin-11.11.0.tgz"
