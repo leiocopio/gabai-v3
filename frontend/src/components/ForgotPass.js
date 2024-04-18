@@ -2,7 +2,7 @@ import { useState, useRef } from "react";
 import Popup from "reactjs-popup";
 import { IoIosCloseCircleOutline } from "react-icons/io";
 import emailjs from "@emailjs/browser";
-import EmailSent from "./ForgotPassEmailSent";
+
 const ForgotPass = () => {
   const serviceID = "service_idpyyi8";
   const templateID = "template_gi60vrx";
@@ -21,6 +21,7 @@ const ForgotPass = () => {
       .then(
         () => {
           console.log("SUCCESS!");
+          alert("Reset password link sent to your email!");
         },
         (error) => {
           console.log("FAILED...", error.text);
@@ -29,11 +30,7 @@ const ForgotPass = () => {
   };
 
   return (
-    <Popup
-      trigger={<button onClick={() => close()}> Forgot Password</button>}
-      modal
-      nested
-    >
+    <Popup trigger={<button> Forgot Password</button>} modal nested>
       {(close) => (
         <div className="modal h-[23rem] w-[31.00rem] rounded-2xl bg-white flex flex-col mx-10 self-center justify-center">
           <div className="flex flex-row align-center justify-end p-1">
@@ -56,11 +53,12 @@ const ForgotPass = () => {
                 type="email"
                 placeholder="Email"
                 value={email}
+                name="user_email"
                 onChange={(e) => setEmail(e.target.value)}
                 className="w-[25rem] border-2 border-black rounded-xl p-2"
                 required
               />
-              <EmailSent onClick={sendEmail} />
+              <button onClick={sendEmail}>Send</button>
             </div>
           </form>
         </div>
