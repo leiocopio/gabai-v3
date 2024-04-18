@@ -30,7 +30,7 @@ const ForgotPass = () => {
   };
 
   return (
-    <Popup trigger={<button> Forgot Password</button>} modal nested>
+    <Popup trigger={<a href="#"> Forgot Password?</a>} modal nested>
       {(close) => (
         <div className="modal h-[23rem] w-[31.00rem] rounded-2xl bg-white flex flex-col mx-10 self-center justify-center">
           <div className="flex flex-row align-center justify-end p-1">

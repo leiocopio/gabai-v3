@@ -19,7 +19,7 @@ import { eye } from "react-icons-kit/feather/eye";
 import { useNavigate } from "react-router-dom"
 
 
-const Signup = ({ initialAddress }) => {
+const CreateAccount = ({ initialAddress }) => {
 
 
 
@@ -31,7 +31,6 @@ const navigate = useNavigate();
   //   });
   const [message, setMessage] = useState('');
 
-  const [role, setRole] = useState("user");
   const [selectedRegion, setSelectedRegion] = useState("");
   const [selectedProvince, setSelectedProvince] = useState("");
   const [selectedCity, setSelectedCity] = useState("");
@@ -216,7 +215,7 @@ const navigate = useNavigate();
 
     // Call signup function with converted address names
     await signup(
-        role,
+        data.role,
         data.username,
         data.firstname,
         data.lastname,
@@ -230,7 +229,10 @@ const navigate = useNavigate();
         data.password
       )
     
-      navigate('/signup-routes')
+
+
+
+      navigate('/admin/user-table')
 
   };
 
@@ -268,22 +270,21 @@ const button = "flex h-10 px-3 py-2 bg-azure text-white rounded-md justify-cente
   return (
     <Popup
       trigger={
-        <Link to="#signup" className="flex w-full h-full items-center justify-center">
-        Sign up
-        </Link>
+        <div className="flex w-full h-full justify-center items-center"><Link to="#create-account">
+          Create new account
+        </Link></div>
       }
       modal
     >
       {(close) => (
-          <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center z-50 backdrop-filter backdrop-blur-lg bg-opacity-25 bg-black">
+          <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center z-50 backdrop-filter backdrop-blur-lg bg-opacity-25 bg-black ">
             <form className="signup" id="signup" onSubmit={handleSubmit(onSubmit)}>
-
               {step === 1 && (
                 <>
                   <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center z-50 ">
                     `{" "}
                     <div className="modal relative h-auto w-[72%] sm:w-[57%] md:w-[52%] lg:w-[47%] xl:w-[37%] 2xl:w-[40%] rounded-2xl bg-white flex flex-col pt-7 py-10 p-3">
-                      <Link to="#" className="absolute flex align-center p-1 inset-y-0 right-0">
+                      <Link to="/admin/user-table" className="absolute flex align-center p-1 inset-y-0 right-0">
                         <IoIosCloseCircleOutline
                           className="text-3xl cursor-pointer"
                           onClick={() => close()}/>
@@ -293,12 +294,8 @@ const button = "flex h-10 px-3 py-2 bg-azure text-white rounded-md justify-cente
                       <div className="w-full h-full grid grid-cols-1 gap-4">
                         <div className="flex flex-col items-center justify-center">
                           <h1 className="font-bold text-3xl m-0">
-                            Sign Up to <span className="text-azure">GabAi</span>
+                            Create <span className="text-azure">New Account</span>
                           </h1>
-                          <p className="block font-normal text-sm">
-                            Register now for a richer, more empowered journey!
-                          </p>
-                          
                         </div>
                       
                       <span className="font-medium justify-center flex text-azure">
@@ -318,7 +315,7 @@ const button = "flex h-10 px-3 py-2 bg-azure text-white rounded-md justify-cente
                           placeholder="Juan"
                           {...register("firstname", {
                             required: true,
-                            pattern: /^[A-Za-zñÑ\s]+$/,
+                            pattern: /^[A-Za-z\s]+$/,
 
                           })}
                           className={input}
@@ -347,7 +344,7 @@ const button = "flex h-10 px-3 py-2 bg-azure text-white rounded-md justify-cente
                           placeholder="Dela Cruz"
                           {...register("lastname", {
                             required: true,
-                            pattern: /^[A-Za-zñÑ\s]+$/,
+                            pattern: /^[A-Za-z\s]+$/,
                           })}
                           className={input}
                           onKeyDown={handleKeyDown}
@@ -461,22 +458,13 @@ const button = "flex h-10 px-3 py-2 bg-azure text-white rounded-md justify-cente
                   <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center z-50 ">
                     `{" "}
                     <div className="modal relative h-auto w-[72%] sm:w-[57%] md:w-[52%] lg:w-[47%] xl:w-[37%] 2xl:w-[40%] rounded-2xl bg-white flex flex-col pt-7 py-10 p-3">
-                    <Link to="#" className="absolute flex align-center p-1 inset-y-0 right-0">
-                        <IoIosCloseCircleOutline
-                          className="text-3xl cursor-pointer"
-                          onClick={() => close()}/>
-                      </Link>
 
                       <div className="w-full h-full flex flex-col-1 justify-center px-4">
                       <div className="w-full h-full grid grid-cols-1 gap-4">
                         <div className="flex flex-col items-center justify-center">
                           <h1 className="font-bold text-3xl m-0">
-                            Sign Up to <span className="text-azure">GabAi</span>
-                          </h1>
-                          <p className="block font-normal text-sm">
-                            Register now for a richer, more empowered journey!
-                          </p>
-                          
+                            Create <span className="text-azure">New Account</span>
+                          </h1> 
                         </div>
                         <span className="font-medium justify-center flex text-azure">
                               Address Information 
@@ -645,21 +633,13 @@ const button = "flex h-10 px-3 py-2 bg-azure text-white rounded-md justify-cente
 
 
                     <div className="modal relative h-auto w-[72%] sm:w-[57%] md:w-[52%] lg:w-[47%] xl:w-[37%] 2xl:w-[40%] rounded-2xl bg-white flex flex-col pt-7 py-10 p-3">
-                    <Link to="#" className="absolute flex align-center p-1 inset-y-0 right-0">
-                        <IoIosCloseCircleOutline
-                          className="text-3xl cursor-pointer"
-                          onClick={() => close()}/>
-                      </Link>
 
                       <div className="w-full h-full flex flex-col-1 justify-center px-4">
                       <div className="w-full h-full grid grid-cols-1 gap-4">
                         <div className="flex flex-col items-center justify-center">
-                          <h1 className="font-bold text-3xl m-0">
-                            Sign Up to <span className="text-azure">GabAi</span>
+                         <h1 className="font-bold text-3xl m-0">
+                            Create <span className="text-azure">New Account</span>
                           </h1>
-                          <p className="block font-normal text-sm">
-                            Register now for a richer, more empowered journey!
-                          </p>
                         </div>
 
                         <span className="font-medium justify-center flex text-azure">
@@ -681,8 +661,8 @@ const button = "flex h-10 px-3 py-2 bg-azure text-white rounded-md justify-cente
                               {...register("username", {
                                 required: true,
                                 minLength: 6,
-                                maxLength: 24,
-                                pattern: /^(?=.*[a-z\d.])(?=.*\d)[a-z\d]+$/i,
+                                maxLength: 12,
+                                pattern: /^(?=.*[a-z])(?=.*\d)[a-z\d]+$/i,
                               })}
                               className={input}
                               onKeyDown={handleKeyDown}
@@ -709,7 +689,7 @@ const button = "flex h-10 px-3 py-2 bg-azure text-white rounded-md justify-cente
                               errors.username.type === "pattern" && (
                                 <span className={warning}>
                                   Username must contain only lowercase letters{" "}
-                                   and at least one number
+                                  <br /> and at least one number
                                 </span>
                               )}
                        </div>
@@ -796,37 +776,59 @@ const button = "flex h-10 px-3 py-2 bg-azure text-white rounded-md justify-cente
                             {errors.password &&
                               errors.password.type === "pattern" && (
                                 <span className={warning}>
-                                  Password must contain at least one number, 
+                                  Password must contain at least one number, <br />
                                   one capital letter, one small letter, and one{" "}
-                                   special character
+                                  <br /> special character
                                 </span>
                               )}
                           </div>
 
                           {/* Confirm Password */}
                           <div>
-                          <label htmlFor="confirmPassword" className={label}>Confirm Password</label>
-                          <input
-                            id="confirmPassword"
-                            type="password"
-                            name="confirmPassword"
-                            placeholder="●●●●●●●●"
-                            {...register("confirmPassword", {
-                              required: true,
-                              validate: {
-                                passwordMatch: (value) => value === passwordValue
-                              }
-                            })}
+                            <label htmlFor="confirmPassword" className={label}>Confirm Password</label>
+                            <input
+                              id="confirmPassword"
+                              type="password"
+                              name="confirmPassword"
+                              placeholder="●●●●●●●●"
+                              {...register("confirmPassword", {
+                                required: true,
+                                validate: {
+                                  passwordMatch: (value) => value === passwordValue
+                                }
+                              })}
+                              className={input}
+                              onKeyDown={handleKeyDown}
+                            />
+                            {errors.confirmPassword && errors.confirmPassword.type === "required" && (
+                              <span className={warning}>Confirm Password is required</span>
+                            )}
+                            {errors.confirmPassword && errors.confirmPassword.type === "passwordMatch" && (
+                              <span className={warning}>Passwords do not match</span>
+                            )}
+                          </div>
+
+                          {/* Role */}
+                      <div className="flex flex-col">
+                          <label htmlFor="role" className={label}>Role</label>
+                          <select
+                            name="role"
+                            id="role"
+                            {...register("role", { required: true })}
                             className={input}
                             onKeyDown={handleKeyDown}
-                          />
-                          {errors.confirmPassword && errors.confirmPassword.type === "required" && (
-                            <span className={warning}>Confirm Password is required</span>
+                          >
+                            <option value="">- Select Role -</option>
+                            <option value="user">User</option>
+                            <option value="admin">Admin</option>
+                            <option value="lawyer">Lawyer</option>
+                          </select>
+                          {errors.role && (
+                            <span  className={warning}>
+                              Role is required
+                            </span>
                           )}
-                          {errors.confirmPassword && errors.confirmPassword.type === "passwordMatch" && (
-                            <span className={warning}>Passwords do not match</span>
-                          )}
-                          </div>
+                      </div>
 
                         <div className="w-full justfy-between flex gap-2">
                           <a href="#" className={button} onClick={prevStep}> {"<"} Previous</a>
@@ -853,4 +855,4 @@ const button = "flex h-10 px-3 py-2 bg-azure text-white rounded-md justify-cente
   );
 };
 
-export default Signup;
+export default CreateAccount;

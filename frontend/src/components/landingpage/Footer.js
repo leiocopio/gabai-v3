@@ -1,6 +1,8 @@
 import { Link } from "react-router-dom";
 import "../../css/footer.css";
 import InstallBtn from "../../components/InstallButton";
+import { FaFacebook, FaPhone, FaMailBulk } from "react-icons/fa";
+
 import iconAzure from "../../img/iconAzure.svg";
 import paragonLogoSolid from "../../img/paragonLogoSolid.svg";
 import uccLogo from "../../img/uccLogo.svg";
@@ -37,73 +39,183 @@ function Footer() {
           alt="Footer Content"
           className="mx-auto w-full py-4 lg:py-8 max-w-4xl "
         >
-          <div className="md:flex md:justify-between">
-            <div className=" md:mb-0 relative inline-block">
-              <div className="flex flex-row gap-3 mb-5">
-                <Link
-                  to="#home"
-                  onClick={() => scrollToElement("#home")}
-                  className="relative group"
-                >
-                  <img
-                    src={iconAzure}
-                    className="h-[3.5rem] w-[3.2rem] py-[0.2rem] opacity-50"
-                    alt="GabAi Logo"
-                  />
-                  <span
-                    class="absolute -top-9 left-[50%] -translate-x-[50%] 
+          <div
+            alt="Footer Content"
+            className="mx-auto w-full py-4 lg:py-8 max-w-4xl "
+          >
+            {/* Top Part */}
+            <div className="md:flex md:justify-between">
+              <div className=" md:mb-0 relative inline-block">
+                <div className="flex flex-row gap-3 mb-5">
+                  <Link
+                    to="#home"
+                    onClick={() => scrollToElement("#home")}
+                    className="relative group"
+                  >
+                    <img
+                      src={iconAzure}
+                      className="h-[3.5rem] w-[3.2rem] py-[0.2rem] opacity-70"
+                      alt="GabAi Logo"
+                    />
+                    <span
+                      class="absolute -top-9 left-[50%] -translate-x-[50%] 
                                     z-30 origin-left scale-0 px-3 rounded-lg bg-white opacity-70 text-azure-500 py-2 text-xs font-semibold
                                     shadow-md transition-all duration-300 ease-in-out delay-200
                                     group-hover:scale-100"
+                    >
+                      GabAi
+                    </span>
+                  </Link>
+                  <Link
+                    to="#developers"
+                    onClick={() => scrollToElement("#developers")}
+                    className="relative group"
                   >
-                    GabAi
-                  </span>
-                </Link>
-                <Link
-                  to="#developers"
-                  onClick={() => scrollToElement("#developers")}
-                  className="relative group"
-                >
-                  <img
-                    src={paragonLogoSolid}
-                    className="h-[3.5rem] w-[3.5rem] opacity-50"
-                    alt="Paragon Logo"
-                  />
-                  <span
-                    class="absolute -top-9 left-[50%] -translate-x-[50%] 
+                    <img
+                      src={paragonLogoSolid}
+                      className="h-[3.5rem] w-[3.5rem] opacity-50"
+                      alt="Paragon Logo"
+                    />
+                    <span
+                      class="absolute -top-9 left-[50%] -translate-x-[50%] 
                                     z-30 origin-left scale-0 px-3 rounded-lg bg-white opacity-70 text-azure-500 py-2 text-xs font-semibold
                                     shadow-md transition-all duration-300 ease-in-out delay-200
                                     group-hover:scale-100"
+                    >
+                      PARAGON
+                    </span>
+                  </Link>
+                  <Link
+                    to="https://ucc-caloocan.edu.ph/"
+                    target="_blank"
+                    className="relative group"
                   >
-                    PARAGON
-                  </span>
-                </Link>
-                <Link
-                  to="https://ucc-caloocan.edu.ph/"
-                  target="_blank"
-                  className="relative group"
-                >
-                  <img
-                    src={uccLogo}
-                    className="h-[3.5rem] w-[3.5rem] opacity-50"
-                    alt="UCC Logo"
-                  />
-                  <span
-                    class="absolute -top-9 left-[50%] -translate-x-[50%] 
+                    <img
+                      src={uccLogo}
+                      className="h-[3.5rem] w-[3.5rem] opacity-50"
+                      alt="UCC Logo"
+                    />
+                    <span
+                      class="absolute -top-9 left-[50%] -translate-x-[50%] 
                                     z-30 origin-left scale-0 px-3 rounded-lg bg-white opacity-70 text-azure-500 py-2 text-xs font-semibold
                                     shadow-md transition-all duration-300 ease-in-out delay-200
                                     group-hover:scale-100"
-                  >
-                    UCC
-                  </span>
-                </Link>
+                    >
+                      UCC
+                    </span>
+                  </Link>
+                </div>
+                <div className="text-xl text-label text-bold opacity-70 font-medium">
+                  GabAi
+                </div>
+                <div className="text-xs text-content text-opacity-70 w-[18rem] pr-[3rem] mb-5">
+                  Your web application for comprehensive legal guides against
+                  workplace discrimination in the Philippines.
+                </div>
+
+                <div>
+                  <InstallBtn />
+                </div>
               </div>
-              <div className="text-xl text-azure text-bold opacity-50 font-medium">
-                GabAi
-              </div>
-              <div className="text-xs text-gray-700 w-[18rem] pr-[3rem]">
-                Your web application for comprehensive legal guides against
-                workplace discrimination in the Philippines.
+
+              {/* Links */}
+              <div className="flex flex-row gap-8">
+                <div>
+                  <b className={title}>Location</b>
+                  <ul>
+                    <li class={content}>
+                      <a
+                        href="https://maps.app.goo.gl/GaZYiq51Pm7YYdoeA"
+                        target="_blank"
+                        class="hover:underline"
+                      >
+                        Brgy. 171, Congressional Rd.,
+                        <br />
+                        Caloocan, Metro Manila,
+                        <br />
+                        Philippines 1105
+                      </a>
+                    </li>
+                  </ul>
+                  <br />
+                  <b className={title}>Contacts</b>
+                  <ul>
+                    <li class={content}>
+                      <a
+                        href="mailto:team.paragon.ucc.bscs@gmail.com"
+                        target="_blank"
+                        class="hover:underline"
+                      >
+                        team.paragon.ucc.bscs@gmail.com
+                      </a>
+                    </li>
+                    <li class={content}>
+                      <a
+                        href="tel:+63 939 419 5233"
+                        target="_blank"
+                        class="hover:underline"
+                      >
+                        +63 939 419 5233
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+
+                <div className="w-[6rem]">
+                  <b className={title}>Legal</b>
+                  <br />
+                  <ul>
+                    <li class={content}>
+                      <a href="#" className="hover:underline">
+                        Privacy
+                      </a>
+                    </li>
+                    <li class={content}>
+                      <a href="#" className="hover:underline">
+                        Terms
+                      </a>
+                    </li>
+                    <li class={content}>
+                      <a href="#" className="hover:underline">
+                        User Agreement
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+
+                <div>
+                  <b className={title}>Links</b>
+                  <br />
+                  <ul>
+                    <li class={content}>
+                      <a
+                        href="https://clients.ncr.dole.gov.ph/home/"
+                        target="_blank"
+                        className="hover:underline"
+                      >
+                        Department of Labor and Employment
+                      </a>
+                    </li>
+                    <li class={content}>
+                      <a
+                        href="https://www.foi.gov.ph/requests?agency=NLRCom"
+                        target="_blank"
+                        className="hover:underline"
+                      >
+                        National Labor Relations Commission
+                      </a>
+                    </li>
+                    <li class={content}>
+                      <a
+                        href="https://www.officialgazette.gov.ph"
+                        target="_blank"
+                        className="hover:underline"
+                      >
+                        Official Gazette of the Philippines
+                      </a>
+                    </li>
+                  </ul>
+                </div>
               </div>
             </div>
 

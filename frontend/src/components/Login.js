@@ -18,15 +18,12 @@ import Popup from "reactjs-popup";
 import Signup from "./Signup";
 import { useLogin } from "../hooks/useLogin";
 
-const clientId = process.env.REACT_APP_GOOGLE_CLIENT_ID;
-
 const Login = ({ setLoginSuccess }) => {
   const [identifier, setIdentifier] = useState("");
   const [password, setPassword] = useState("");
   const [type, setType] = useState("password");
   const [icon, setIcon] = useState(eyeOff);
-  const { login, error, isLoading } = useLogin();
-  const navigate = useNavigate();
+  let { login, error, isLoading } = useLogin();
 
   const handleToggle = () => {
     if (type === "password") {
@@ -38,9 +35,33 @@ const Login = ({ setLoginSuccess }) => {
     }
   };
 
+  const navigate = useNavigate();
+
   const handleSubmit = async (e) => {
     e.preventDefault();
+
     await login(identifier, password);
+    if (error) {
+      switch (error) {
+        case "All fields are required":
+          navigate("/login-routes");
+          error = !error;
+          break;
+        case "Incorrect username or email":
+          navigate("/login-routes");
+          error = !error;
+          break;
+        default:
+          navigate("/login-routes");
+          error = !error;
+          break;
+      }
+    } else if (!error || error === false || error === null) {
+      navigate("/login-routes");
+    }
+
+    console.log(`error: ${error}`);
+    console.log(`user: ${user}`);
   };
 
   const handleGoogleLoginSuccess = async (response) => {
@@ -73,7 +94,7 @@ const Login = ({ setLoginSuccess }) => {
     }
   };
 
-  const label = "block font-normal text-sm";
+  const label = "block font-normal text-sm flex-row";
   const warning = "block font-normal text-sm text-red-500 error mt-1";
   const input =
     "flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-xs ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50";
@@ -83,7 +104,7 @@ const Login = ({ setLoginSuccess }) => {
   return (
     <Popup
       trigger={
-        <button className="rounded-xl p-4 py-1.5 bg-azure-500 text-white hover:scale-[1.1] transition-all duration-100 ease-in-out relative z-10 after:absolute after:-z-20  after:h-1 after:w-1 after:bg-azure-300 after:left-5 overflow-hidden after:bottom-0 after:translate-y-full after:rounded-md after:hover:scale-[50] after:hover:transition-all after:hover:duration-650 after:transition-all after:duration-300">
+        <button className="flex w-full h-full items-center justify-center">
           Log in
         </button>
       }
@@ -92,13 +113,16 @@ const Login = ({ setLoginSuccess }) => {
     >
       {(close) => (
         <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center z-50 backdrop-filter backdrop-blur-lg bg-opacity-25 bg-black ">
-          <div className="modal relative h-auto w-[70%] sm:w-[55%] md:w-[50%] lg:w-[45%] xl:w-[35%] rounded-2xl bg-white flex flex-col pt-7 py-10 p-3">
-            <div className="absolute flex align-center p-1 inset-y-0 right-0">
+          <div className="modal relative h-auto w-[70%] sm:w-[55%] md:w-[50%] lg:w-[45%] xl:w-[35%] rounded-2xl bg-bkg text-content flex flex-col pt-7 py-10 p-3">
+            <Link
+              to="#"
+              className="absolute flex align-center p-1 inset-y-0 right-0"
+            >
               <IoIosCloseCircleOutline
                 className="text-3xl cursor-pointer"
                 onClick={() => close()}
               />
-            </div>
+            </Link>
             <div className="w-full h-full flex flex-col-1 justify-center px-4">
               <div className="w-full h-full grid grid-cols-1 gap-4">
                 <div className="flex flex-col items-center justify-center">
@@ -165,7 +189,7 @@ const Login = ({ setLoginSuccess }) => {
                           />
                         </div>
                       </div>
-                      <div className="items-center justify-center font-normal text-sm underline hover:text-azure">
+                      <div className="items-center justify-center font-normal text-sm hover:underline text-azure">
                         <ForgotPass />
                       </div>
                       {/* Testing */}
@@ -174,7 +198,13 @@ const Login = ({ setLoginSuccess }) => {
                 </div>
                 <div className="flex items-center justify-center">
                   <p className={label}>
-                    Don't have an account? <Signup />
+                    Don't have an account?{" "}
+                    <Link
+                      to="/#signup"
+                      className="inline-block text-azure hover:underline"
+                    >
+                      <Signup />
+                    </Link>
                     {/* <SignupAdminAndLawyer /> */}
                   </p>
                 </div>

@@ -11,6 +11,7 @@ import Section4 from "../components/landingpage/Section4";
 import Developers from "../components/landingpage/Developers";
 import Faq from "../components/landingpage/Faq";
 import { FaQq } from "react-icons/fa6";
+import Footer from "../components/landingpage/Footer.js";
 
 import blob from "../img/Blob.svg";
 
@@ -63,7 +64,7 @@ useEffect(() => {
 }, []);
 
   return (
-    <>
+    <div className="bg-bkg text-content">
       <Helmet>
         <title>Home | GabAi</title>
       </Helmet>
@@ -82,7 +83,7 @@ useEffect(() => {
             </img>
       </div>
       
-      <div className="w-full relative max-w-4xl px-5 lg:px-0 center mx-auto">
+      <div className="w-full relative max-w-4xl px-5 lg:px-0 center mx-auto pb-10">
         <section id="home">
           {/* 1st section of landing page */}
          <Section1 />
@@ -113,10 +114,12 @@ useEffect(() => {
           <Section4 />
         </section>
       </div>
-      {/* 
-      Logout button */}
-      {/* {user && <button onClick={handleLogout}>Logout</button>} */}
-    </>
+      
+        <section id="footer">
+          {/* Footer */}
+          <Footer />
+        </section>
+    </div>
   );
 }
 

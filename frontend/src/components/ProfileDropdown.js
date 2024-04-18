@@ -20,6 +20,7 @@ const navigate = useNavigate()
 const handleLogout = () => {
     // Remove user from local storage
     localStorage.removeItem("user");
+    localStorage.setItem("hasShownToast", "false");
     // Dispatch logout action
     dispatch({ type: "LOGOUT" });
     navigate('/')
