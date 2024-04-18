@@ -58,11 +58,16 @@ import LawyerVideoCon from "./pages/lawyer/LawyerVideoCon";
 import RequestForm from "./components/RequestForm";
 import VerificationPage from "./components/VerificationPage";
 
+//Reset Password Routes
+
+import ResetPassword from "./pages/resetPassword/resetPassword";
+
 const App = () => {
   const { user, dispatch } = useAuthContext();
 
   return (
     <Router>
+<<<<<<< Updated upstream
       {user ? (
         user.role === "user" ? (
           <UserNavbar />
@@ -83,6 +88,16 @@ const App = () => {
         {/* <Route path="/verify/success" element={<SuccessPage />} /> */}
 
         {/* <Route path="/verify/:token" element={<VerificationPage />} /> */}
+=======
+      <Navbar />
+      <UserNavbar />
+      <AdminNavbar />
+      <LawyerNavbar />
+
+      <Routes>
+        {/* Landing route */}
+        <Route path="/" element={<LandingPage />} />
+>>>>>>> Stashed changes
 
         {user ? (
           user.role === "user" ? (
@@ -119,8 +134,17 @@ const App = () => {
         <Route path="/admin/feedbacks" element={<FeedbackList />} />
         <Route path="/admin/admin-archive" element={<AdminArchivedList />} />
 
+<<<<<<< Updated upstream
         {user ? null : <Route path="/#login" element={<Login />} />}
         {user ? null : <Route path="/#signup" element={<Signup />} />}
+=======
+        {/* 404 route */}
+        <Route path="*" element={<PageNotFound />} />
+
+        {/* Reset Password */}
+        <Route path="/reset-password/:id" element={<ResetPassword />} />
+      </Routes>
+>>>>>>> Stashed changes
 
         {user ? <Route path="/profile" element={<UserProfile />} /> : null}
         <Route path="/request" element={<RequestForm />} />
